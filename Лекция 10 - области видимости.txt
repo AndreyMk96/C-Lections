@@ -1,0 +1,18 @@
+//переменные делятся на глобальные и локальные
+int value;//глобальная переменная
+
+int main()
+{
+	if (true) {
+		int a = 0;
+		cout << a << endl;
+	}
+	//a = a + 5//error
+	for (int i = 0; i < 1; i++) {
+		cout << "hello" << endl;
+	}
+	//cout << i//error
+	cout << value << endl; //по умолчанию глобальные переменные инициализируются 0
+	_getch();
+    return 0;
+}

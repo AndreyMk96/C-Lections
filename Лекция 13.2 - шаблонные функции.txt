@@ -1,0 +1,21 @@
+//шаблоны функций, шаблонные функции
+template <typename T>//Т - условное название типа, который мы планируем принимать
+T Sum(T a, T b) {
+	return a + b;
+}
+
+template <typename T1, typename T2>
+T1 Sum2(T1 a, T2 b) {
+	return a + b;
+}
+
+int main()
+{
+	cout << Sum(5, 10) << endl;
+	cout << Sum(5.35, 10.2) << endl;
+	//cout << Sum(5.35, 10) << endl;//error
+	cout << Sum2(5.35, 10) << endl;
+	cout << Sum2(5, 10) << endl;
+	_getch();
+    return 0;
+}

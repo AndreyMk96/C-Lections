@@ -1,0 +1,17 @@
+int main()
+{
+	//генерируем одни и теже числа
+	cout << rand() << endl;
+	cout << rand() << endl;
+	cout << time(0) << endl;//возвращает время в секундах с 01.01.1970
+	srand(time(NULL));
+	//генерируются разные числа
+	cout << rand() << endl;
+	cout << rand() << endl;
+	//генерируем в промежутке 0 - 10
+	cout << rand() % 11 << endl;
+	//генерируем в промежутке 10 - 20
+	cout << 10 + rand() % 21 << endl;
+	_getch();
+    return 0;
+}

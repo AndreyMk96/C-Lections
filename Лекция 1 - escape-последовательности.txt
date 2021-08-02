@@ -1,0 +1,17 @@
+#include "stdafx.h"
+#include <iostream>
+#include <conio.h>
+
+using namespace std;
+
+int main()
+{
+	cout << "Hello\n";//перенос строки
+	cout << "Hello\t";//табуляция
+	cout << "Hello\"";//кавычка
+	cout << "Hello\'";//кавычка
+	cout << "Hello\\";//бэкслеш
+	cout << "Hello\b\b";//удаление последнего выведенного символа
+	_getch();
+    return 0;
+}

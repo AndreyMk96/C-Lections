@@ -1,0 +1,21 @@
+int main()
+{
+	//switch -  оператор множественного выбора
+	int a;
+	cin >> a;
+	switch (a)
+	{
+	case 1:
+		cout << "you input number 1";
+		//break;
+
+	case 2:
+		cout << "you input 2";
+		break;
+	default:
+		cout << "i dont know this number";
+		break;
+	}
+	_getch();
+    return 0;
+}

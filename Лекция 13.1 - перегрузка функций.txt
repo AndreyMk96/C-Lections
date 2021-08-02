@@ -1,0 +1,21 @@
+//перегрузка функций
+
+int Sum(int a, int b) {
+	return a + b;
+}
+
+double Sum(double a, double b) {
+	return a + b;
+}
+
+int Sum(int a, int b, int c) {
+	return a + b + c;
+}
+int main()
+{
+	cout << Sum(3, 5) << endl;
+	cout << Sum(3.44, 5.08) << endl;
+	cout << Sum(1, 2, 3) << endl;
+	_getch();
+    return 0;
+}
