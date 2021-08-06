@@ -1,0 +1,43 @@
+using namespace std;
+//передача аргументов в функцию по указателю
+//возврат нескольких значений в функцию
+
+void Foo(int a) {
+	a++;
+}
+
+void Foo2(int *pa){
+	(*pa)++;
+}
+
+//возврат нескольких значений про помощи указателей
+void Foo3(int *pa, int *pb, int*pc) {
+	(*pa) = 555;
+	(*pb)++;
+	(*pc) =  -20;
+}
+
+void Home(int *pa, int *pb) {
+	int flag = *pa;
+	*pa = *pb;
+	*pb = flag;
+}
+int main()
+{
+	
+	int a = 0,b = 0, c = 1;
+	cout << a << endl;
+	Foo(a);
+	cout << a << endl;//a не изменится, так как нет возврата + обл видимости
+	Foo2(&a); //&a - передаем адрес переменной а
+	cout << a << endl;
+	cout << a << " " << b << " " << c << endl;
+	Foo3(&a, &b, &c);
+	cout << a << " " << b << " " << c << endl;
+	//ДЗ - написать функцию меняющую значения пеерменных через указатели
+	int temp1 = 10, temp2 = 20;
+	Home(&temp1, &temp2);
+	cout << temp1 << " " << temp2 << endl;
+ 	_getch();
+    return 0;
+}
