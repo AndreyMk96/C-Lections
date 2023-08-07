@@ -1,0 +1,20 @@
+//Лекция 5 - Константные переменные
+#include <iostream>
+using namespace std;
+int main()
+{
+    // Константная переменная - это именованная область оперативной памяти, предназначенная для хранения постоянных данных
+
+    const int YEAR = 2023; // Константные переменные принято именовать в верхнем регистре
+    const float PI = 3.14;
+
+    cout << YEAR << endl;
+    cout << PI << endl;
+
+    //YEAR = 2024; // error assignment of read-only variable 'YEAR'
+
+    const char TAB = '\t';  // Константная переменная типа char
+    cout <<  TAB << YEAR << endl;
+    
+    return 0;
+}

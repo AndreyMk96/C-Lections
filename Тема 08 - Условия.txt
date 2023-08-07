@@ -1,0 +1,36 @@
+// Тема 8 - Условия
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    /*
+    if (утверждение или выражение){
+         Действие;
+    }
+    cout<<"Hello World";
+    */
+    bool rain = true;
+    if (rain){
+        cout << "Доджь идет" << endl;
+    }
+    else{  // else выполняется, когда не выполняется if
+        cout << "Дождь не идет" << endl;
+    }
+    
+    
+    // Конструкция if - else if - else
+    int a = 10;
+    if (a > 10){
+        cout << "Число больше десяти" << endl;
+    }
+    else if (a == 10){
+        cout << "Число равно десяти" << endl;
+    }
+    else{
+        cout << "Число меньше десяти" << endl;
+    }
+    return 0;
+}
