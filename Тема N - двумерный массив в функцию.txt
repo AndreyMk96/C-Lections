@@ -1,0 +1,31 @@
+#include "stdafx.h"
+#include <iostream>
+#include <conio.h>
+
+using namespace std;
+
+int **mult(int arr[][3]){ 
+	for (int i = 0; i < 3; i++){
+		for (int j = 0; j < 3; j++){
+			arr[i][j] = arr[i][j] * 2;
+		}
+	}
+	return 0;
+}
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	int arr[3][3] = { 
+	{ 1, 2, 3 }, 
+	{ 4, 5, 6 }, 
+	{ 7 ,8, 9 }
+	};
+	mult(arr);
+	for (int i = 0; i < 3; i++){
+		for (int j = 0; j < 3; j++){
+			cout << arr[i][j] << " ";
+		}
+	}
+	_getch();
+	return 0;
+}

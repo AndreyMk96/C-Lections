@@ -1,0 +1,32 @@
+// Тема 15 - Вложеные циклы
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    // Пример вложенного цикла for
+    for (int i = 1; i < 5; i++){
+        cout << "Сработал 1-й цикл for итерация №" << i << endl;
+        for (int j = 0; j < 5; j++){
+            cout << "\tСработал 2-й цикл for итерация №" << j<< endl;
+        }
+    }
+    
+    // Проверка числа на простоту при помощи цикла for
+    int n = 17;
+    bool flag = true;
+    for (int i = 2; i <= n / 2; i++) {
+        if (n % i == 0) {
+            flag = false;
+            break;
+            }
+        }
+    if (flag)
+        cout << "Число простое";
+    else
+        cout << "Число не простое";
+    
+    return 0;
+}

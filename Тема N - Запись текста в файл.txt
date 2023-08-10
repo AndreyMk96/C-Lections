@@ -1,0 +1,37 @@
+#define _CRT_SECURE_NO_WARNING
+#include "stdafx.h"
+#include <string>
+#include <conio.h>
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+void out(char str[10]) {
+	ofstream fout("aaa.txt"); // создаём объект класса ofstream для записи и связываем его с файлом cppstudio.txt
+	fout << str; // запись строки в файл
+	fout.close(); // закрываем файл
+	cout << "end";
+}
+
+char *inp(char text[1000]) {
+	ifstream fin("text.txt"); // открыли файл для чтения
+
+	fin >> text; // считали первое слово из файла
+
+	fin.getline(text, 50); // считали строку из файла
+	fin.close(); // закрываем файл
+	return text;
+}
+
+
+int main()
+{
+	char str[10] = "aaasdfd";
+	char text[1000];
+	out(str);
+	inp(text);
+	cout << text;
+	_getch();
+    return 0;
+}

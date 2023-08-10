@@ -1,0 +1,71 @@
+/* Указатели
+Указатели на функцию*/
+
+
+#include "stdafx.h"
+#include <iostream>
+#include <conio.h>
+#include <string>
+
+using namespace std;
+
+string GetDataFromBd() {
+	return "data from bd";
+}
+string GetDataFromWebServer() {
+	return "DataFromWebServer";
+}
+void f1(int a) {
+	cout << "f1" << endl;
+}
+
+void f2(int a) {
+	cout << a << endl;
+}
+
+int f3(int a) {
+	return a - 1;
+}
+
+int f4(int a) {
+	return a * 2;
+}
+
+void show_info(string f()){
+	cout << f()<<endl;
+}
+int main()
+{
+	//Указатель - это переменная, которая содержит адрес другой переменной
+	int a = 5;
+	int b = a;
+	//подставляем адрес ячейки с переменной a
+	//* - указатель & взятие адреса(ссылка)
+	int *px = &a;
+	cout << px<<endl;
+	//обратимся через разоименование
+	cout << *px<<endl;
+	int *px2 = &a;
+	cout << px << " " << px2 << endl;
+	cout << a << endl; 
+	*px2 = 2;
+	cout << a << endl;
+	///////////////////////////////////////////////////
+
+	//Указатель на функцию это переменная, которой мы можем присвоить ссылку на функцию
+	void(*pointer)(int a);//указатель для функции pointer
+
+	//вызовем функцию через указатель
+	pointer = f2;
+	pointer(1);
+
+	//создаем указатель для двух новых функций
+	int(*new_pointer)(int a);
+	new_pointer = f3;
+	cout << new_pointer(5);
+	show_info(GetDataFromWebServer);
+	_getch();
+    return 0;
+}
+
+

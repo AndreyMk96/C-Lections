@@ -1,0 +1,29 @@
+// Тема 12 - Цикл do-while
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    // В цикла Do - While, тело цикла находится до проверки на истинность выражения.
+    // Цикл Do - while, всегда выполнится хотя бы один раз
+    
+    // Выполнится один раз
+    int a = 10;
+    do{
+        cout << a << endl;
+        a++;
+    }
+    while(a < 10);
+    
+    int b = 0;
+    do{
+        cout << b << endl;
+        b++;
+    }
+    while(b < 3);
+
+
+    return 0;
+}

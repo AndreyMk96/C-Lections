@@ -1,0 +1,22 @@
+#include "stdafx.h"
+#include <iostream>
+#include <time.h>
+#include <conio.h>
+using namespace std;
+
+
+int main()
+{
+	const int size = 100000;
+	int matrix[size];
+	srand(time(NULL));
+	float start_time = clock();
+	for (int i = 0; i < size; i++){
+		matrix[i] = 1 + rand() % 5;
+		cout << matrix[i] << " ";
+	}
+	float end_time = clock();
+	cout << endl;
+	cout << (end_time - start_time)/1000;//clock считает в милисекундах, поэтому делим на 1000
+	_getch();
+}

@@ -1,0 +1,28 @@
+// Тема N - Цикл While 
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    // Цикл - это неоднократное повторение одного и того же участка кода
+    
+    /*
+    while (утверждение){
+        тело цикла
+    }
+    */
+    
+    int a = 0;
+    while (a < 10){
+        cout << "Переменная а = " << a << endl;
+        a++;
+    }
+    
+    // Цикл while может быть бесконченым
+    while(true){
+        cout << "Andrey" << endl;
+    }
+    return 0;
+}

@@ -1,0 +1,19 @@
+// Тема 14 - Оператор continue
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    // Оператор continue прерывает выполнение текущей итерации цикла, и выполняет переход в начало следующей итерации
+    
+    // Пример цикла с оператором continue
+    for(int i = 0; i < 10; i++){
+        if (i % 3 == 0){
+            continue;
+        }
+        cout << i << endl;
+    }
+    return 0;
+}

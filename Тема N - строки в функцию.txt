@@ -1,0 +1,55 @@
+#define _CRT_SECURE_NO_WARNING
+#include "stdafx.h"
+#include <string>
+#include <conio.h>
+#include <iostream>
+
+using namespace std;
+
+char *funk(char str[10], char str2[10]) {
+	strcpy_s(str2, 10, str);
+	return str2;
+}
+
+char *funk2(char str[10], char str3[10]) {
+	strcat_s(str3, 10, str);
+	return str3;
+}
+
+
+int main()
+{
+	char str[10] = "sdfd";
+	char str2[10] = "";
+	char str3[10] = "aa";
+	funk(str, str2);
+	funk2(str, str3);
+	printf("%s\n", str2);
+	printf("%s", str3);
+	_getch();
+    return 0;
+}
+
+
+-----------------------------------------------------------
+
+#define _CRT_SECURE_NO_WARNINGS
+#include "stdafx.h"
+#include <iostream>
+#include <conio.h>
+#include <string>
+using namespace std;
+
+string funk1(string str1){
+	reverse(str1.begin(), str1.end());
+	return str1;
+}
+
+int main() {
+	string str1 = "sfd";
+	string str2;
+	str2 = funk1(str1);
+	cout << str2;
+	_getch();
+	return 0;
+}
