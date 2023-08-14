@@ -1,0 +1,34 @@
+// Тема N - Null pointer
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int * pointer_a = new int;
+    *pointer_a = 10;
+    cout << *pointer_a << endl;
+    delete pointer_a;
+    cout << *pointer_a << endl;  // Область памяти со значением 10 очищена, но указатель на нее остался
+
+    pointer_a = NULL; // можно сделать, чтобы указатель указывал на NULL(затереть указатель)
+    // NULL компилятором считвыется как 0(integer)
+
+    // Сначала необходимо очистить область памяти ф-цией delete, и нтолько потом присвоить значение NULL/nullptr
+    // Иначе произойдет утечка памяти
+    cout << pointer_a << endl;
+    cout << sizeof(pointer_a) << endl;
+
+    // Проверка указателя
+    if (pointer_a == NULL){
+        cout << "Указатель пустой" << endl;
+    }
+    // В некоторых языках программирования Null является отдельным типом данных
+
+    // Ключевое слово nullptr представляет значение пустого указателя.
+    // Лучше использовать nullptr, в современных стандартах
+    pointer_a = nullptr;
+    if (pointer_a == nullptr){
+        cout << "Указатель пустой" << endl;
+    }
+}
