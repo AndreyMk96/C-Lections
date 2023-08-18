@@ -1,0 +1,61 @@
+// Тема N - Динамические массивы. Добавление элементов.
+
+#include <iostream>
+
+using namespace std;
+
+// Функция для вывода массива на консоль
+void print_array(string text, int *a, int size){
+    cout << text <<"\t";
+    for(int i = 0; i < size; i++){
+        cout << a[i] << " ";
+    }
+    cout << endl;
+}
+
+void add_item(int *&a, int size, int item){
+    int *new_arr = new int [size + 1];
+    for (int i = 0; i < size; i++){
+        new_arr[i] = a[i];
+    }
+    new_arr[size] = item;
+    delete[] a;
+    a = new_arr;
+}
+
+int main()
+{
+    // Основная сложность при изменении количества элементов в массиве -
+    // память под массив выделяется непрерывно
+
+    // Чтобы добавить элемент в массив, необходимо создать новый массив, размером больше, и вручную переписать данные
+
+    int size = 5;
+    int *arr = new int[size]{1,3,5,7,9};
+
+    // Добавление элемента
+    int *new_arr = new int[size + 1];
+    for (int i = 0; i < size; i++){
+        new_arr[i] = arr[i];
+    }
+    new_arr[size] = 100;
+    size++;
+
+    delete[] arr;
+    arr = new_arr;  // Так как область памяти указателя arr очищена, то можно сделать, чтобы он ссылался на новый массив
+    print_array("arr1", arr, size);
+
+    // В случае если добавить надо несколько элементов, добавление лучше реализовать через функцию
+    // Пример. Дан массив из 10 элементов. Необходимо добавить все четные элементы в конец массива
+    // В функции массив принимается по сылке на указатель
+    int size2 = 10;
+    int *arr2 = new int[size2] {1,2,3,4,5,6,7,8,9,10};
+    for(int i = 0; i < 10; i++){
+        if (arr2[i] % 2 == 0)
+        {
+            add_item(arr2, size2, arr2[i]);
+            size2++;
+        }
+    }
+    print_array("arr2", arr2, size2);
+}
