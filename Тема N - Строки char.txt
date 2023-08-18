@@ -1,0 +1,65 @@
+// Тема N - Строки char
+
+#include <iostream>
+#include <cstring>
+
+using namespace std;
+
+void PrintLength(char str[]){
+    cout << std::strlen(str) << endl;
+}
+
+void PrintLength2(char * str){
+    cout << std::strlen(str) << endl;
+}
+
+void PrintWordLength(char arr[][10]){
+    for(int i = 0; i < 4; i++){
+        cout << strlen(arr[i]) << " ";
+    }
+    cout << endl;
+}
+
+void PrintWordLength2(char * arr[]){
+    for(int i = 0; i < 4; i++){
+        cout << strlen(arr[i]) << " ";
+    }
+    cout << endl;
+}
+int main()
+{
+    // В так называемом С-стиле строка это массив символов
+
+    char str[] = "Hello, world";
+    cout << str << endl;
+    cout << sizeof(str) << endl; // Видно что длина 13
+    cout << str[12] << endl; // Последний символ - символ окончания строки
+
+    // Однако, что если такой символ не будет найден или в процессе манипуляций
+    // со строкой будет удален, то дальшейшие действия с такой строкой могут иметь
+    // недетерминированный результат.
+
+    // По этой причине строки в С-стиле считаются небезопасными, и рекомендуется для хранения строк
+    // в C++ использовать тип std::string из модуля <string>
+
+    // Также со строками можно работать через указатели
+    char * pointer_str = str;
+    cout << pointer_str << endl;
+
+    // Массив строк char
+    char arr[][10] = {"My", "Name", "is", "Andrey"};
+    for(int i = 0; i < 4; i++){
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+
+    // Передача строки в функцию по указателю и по ссылке
+    PrintLength("helloWorld");
+    PrintLength2("helloWorld");
+
+    // Передача массива строк в функцию
+    PrintWordLength(arr);
+    PrintWordLength(arr);
+
+    return 0;
+}

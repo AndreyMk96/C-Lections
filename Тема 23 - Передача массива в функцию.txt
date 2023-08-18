@@ -1,0 +1,41 @@
+// Тема 23 - Передача массива в функцию
+
+#include <iostream>
+
+using namespace std;
+
+// Функция умножения элементов массива
+void MultArray(int arr[], const int size){
+    for (int i = 0; i < size; i++){
+        arr[i] *= 2;
+    }
+}
+
+// Функция вывода массива
+void PrintArray(int arr[], const int size){
+    for (int i = 0; i < size; i++){
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+}
+
+int main()
+{
+    // Массив передается в функцию по указателю
+    const int SIZE = 5;
+    int arr[SIZE] = {1,3,5,7,9};
+    PrintArray(arr, SIZE);
+    MultArray(arr, SIZE);
+    PrintArray(arr, SIZE);
+    
+    // Если функция принимает в качестве параметра массив, то фактически в эту 
+    // функцию передается указатель на первый элемент массива. То есть как и в случае 
+    // с указателями нам доступен адрес, по которому мы можем менять значения. 
+    // Поэтому следующие объявления функции будут по сути равноценны:
+    
+    // void print(int numbers[]);
+    // void print(int *numbers);
+
+
+    return 0;
+}
