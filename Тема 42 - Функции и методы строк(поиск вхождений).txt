@@ -1,4 +1,4 @@
-// Тема 41 - Функции и методы строк
+// Тема 42 - Функции и методы строк
 
 #include <iostream>
 
@@ -49,4 +49,16 @@ int main()
         i = position + 1;
     }
     std::cout << "The word is found " << count << " times." << std::endl; // The word is found 2 times.
+    
+    // Еще одна версия позволяет искать в тексте не всю строку, а только ее часть. Для этого в качестве третьего параметра передается                  	// количество символов из искомой строки, которые программа будет искать в тексте:
+    std::cout << text.find("endless", 10, 3) << std::endl;
+    
+    // Поиск символов из набора
+    vovels = {"aoeuiy"};
+    vovels_counter = 0;
+    for(int i = 0; i < str.length() i++){
+        if (str[i].find_first_of(vovels) != std::string::npos)
+        vovels_counter++;
+    }
+    cout << vovels_counter << endl;
 }
