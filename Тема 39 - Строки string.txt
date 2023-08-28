@@ -1,0 +1,50 @@
+#include <iostream>
+
+using namespace std;
+
+void StringLength(string s1){
+    int count = 0;
+    for (const char symbol :s1){
+        count++;
+    }
+    cout << "string length" << " " << count << endl;
+}
+
+string CreateNewString(string  s1, string s2){
+    return s1 + s2;
+}
+
+int main()
+{
+    // Объявление строки string
+    string str1{"message"};
+    string str2 = "message";
+
+    // Также объект string можно инициализировать другим объектом string
+    string str3 = {str1};
+
+    // Вывод строк
+    cout << str1 << " " << str2 << " " << str3 << endl;
+
+    // Обращение по индексу
+    cout << str1[1] << endl;
+    str1[2] = '*';
+
+    // Перебор строки циклом
+    for (const char symbol : str1){
+        cout << symbol << " ";
+    }
+    cout << endl;
+
+    // Передача строки в функцию
+    StringLength("hi, friend");
+
+    // Функция типа string
+    cout << CreateNewString("Hi", "Friend") << endl;
+
+    // Считывать строку с клавиатуры лучше методом getline()
+    // cin считывает до пробела
+    string str4;
+    getline(cin, str4);
+    cout << str4 << endl;
+}
