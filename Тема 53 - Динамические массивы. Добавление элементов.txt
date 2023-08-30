@@ -1,4 +1,4 @@
-// Тема N - Динамические массивы. Добавление элементов.
+// Тема 53 - Динамические массивы. Добавление элементов
 
 #include <iostream>
 
@@ -13,6 +13,7 @@ void print_array(string text, int *a, int size){
     cout << endl;
 }
 
+// Функция добавления элементов в конец массива
 void add_item(int *&a, int size, int item){
     int *new_arr = new int [size + 1];
     for (int i = 0; i < size; i++){
@@ -22,6 +23,23 @@ void add_item(int *&a, int size, int item){
     delete[] a;
     a = new_arr;
 }
+
+// Функция добавления элементов в середину массива
+void insert_item(int *&a, int size, int item, int pos){
+    int *new_arr = new int [size + 1];
+    for (int i = 0; i < pos + 1; i++){
+        new_arr[i] = a[i];
+    }
+    new_arr[pos + 1] = item;
+    for(int i = pos + 2; i < size+2; i++){
+        new_arr[i] = a[i - 1];
+    }
+    //print_array("arr3", new_arr, size+1);
+    delete[] a;
+    a = new_arr;
+}
+
+
 
 int main()
 {
@@ -58,4 +76,17 @@ int main()
         }
     }
     print_array("arr2", arr2, size2);
+
+    // Пример. Дан массив из 10 элементов. Добавить после каждого четного элемента квадрат этого элемента
+    int size3 = 10;
+    int *arr3 = new int[size3] {1,20,3,4,5,6,7,8,9,10};
+    for(int i = 0; i < size3; i++){
+        if (arr3[i] % 2 == 0)
+        {
+            insert_item(arr3, size3, arr3[i] * arr3[i], i);
+            size3+=1;
+            i++;
+        }
+    }
+    print_array("arr3", arr3, size3);
 }
