@@ -1,37 +1,37 @@
-#define _CRT_SECURE_NO_WARNING
-#include "stdafx.h"
-#include <string>
-#include <conio.h>
+// Тема 47 - Запись текстовых файлов
 #include <iostream>
 #include <fstream>
 
 using namespace std;
 
-void out(char str[10]) {
-	ofstream fout("aaa.txt"); // создаём объект класса ofstream для записи и связываем его с файлом cppstudio.txt
-	fout << str; // запись строки в файл
-	fout.close(); // закрываем файл
-	cout << "end";
-}
-
-char *inp(char text[1000]) {
-	ifstream fin("text.txt"); // открыли файл для чтения
-
-	fin >> text; // считали первое слово из файла
-
-	fin.getline(text, 50); // считали строку из файла
-	fin.close(); // закрываем файл
-	return text;
-}
-
-
 int main()
 {
-	char str[10] = "aaasdfd";
-	char text[1000];
-	out(str);
-	inp(text);
-	cout << text;
-	_getch();
-    return 0;
+    // Для записи в файл к объекту ofstream или fstream применяется оператор << (как и при выводе на консоль):
+    std::ofstream out;          // поток для записи
+    out.open("test_write.txt");      // открываем файл для записи
+    if (out.is_open())
+    {
+        out << "Hello World!" << std::endl;
+    }
+    out.close();
+    // Если текстового документа с таким именем нет, он создастся автоматически
+    // Если с таким именем есть не пустой файл, он перезапишется
+
+    // Дозапись файла
+    std::ofstream out2;
+    out2.open("test_write.txt", std::ios::app);
+    if (out2.is_open())
+    {
+        out2 << "Hello World! 2" << std::endl;
+    }
+    out.close();
+    // Задачи
+    // 1) Даны два текстовых файла. Поменять их содержимое местами
+    // 2) Даны текстовый файл. Записать его содержимое в другой файл в обратном порядке
+    // 3) Имеется текстовый файл prices.txt с информацией о заказе из интернет магазина.
+    // В нем каждая строка с помощью символа табуляции \t разделена на три колонки:
+    // наименование товара;
+    // количество товара (целое число);
+    // цена (в рублях) товара за 1 шт. (целое число).
+    // Напишите программу, подсчитывающую общую стоимость заказа.
 }
