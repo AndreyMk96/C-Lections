@@ -1,0 +1,63 @@
+#define _CRT_SECURE_NO_WARNING
+#include "stdafx.h"
+#include <string>
+#include <conio.h>
+#include <iostream>
+
+using namespace std;
+
+char *funk(char str[10], char str2[10]) {
+	strcpy_s(str2, 10, str);
+	return str2;
+}
+
+char *funk2(char str[10], char str3[10]) {
+	strcat_s(str3, 10, str);
+	return str3;
+}
+
+void PrintLength(char str[]){
+    cout << std::strlen(str) << endl;
+}
+
+void PrintLength2(char * str){
+    cout << std::strlen(str) << endl;
+}
+
+void PrintWordLength(char arr[][10]){
+    for(int i = 0; i < 4; i++){
+        cout << strlen(arr[i]) << " ";
+    }
+    cout << endl;
+}
+
+void PrintWordLength2(char * arr[]){
+    for(int i = 0; i < 4; i++){
+        cout << strlen(arr[i]) << " ";
+    }
+    cout << endl;
+}
+
+
+int main()
+{
+	char str[10] = "sdfd";
+	char str2[10] = "";
+	char str3[10] = "aa";
+	funk(str, str2);
+	funk2(str, str3);
+	printf("%s\n", str2);
+	printf("%s", str3);
+
+    // Передача строки в функцию по указателю и по ссылке
+    PrintLength("helloWorld");
+    PrintLength2("helloWorld");
+
+    // Передача массива строк в функцию
+    PrintWordLength(arr);
+    PrintWordLength(arr);
+
+	_getch();
+    return 0;
+}
+
