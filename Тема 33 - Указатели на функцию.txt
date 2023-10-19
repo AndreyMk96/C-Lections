@@ -1,71 +1,60 @@
-/* Указатели
-Указатели на функцию*/
+// Тема 33 - указатель на функцию в качестве параметра
 
-
-#include "stdafx.h"
 #include <iostream>
-#include <conio.h>
-#include <string>
 
 using namespace std;
 
-string GetDataFromBd() {
-	return "data from bd";
-}
-string GetDataFromWebServer() {
-	return "DataFromWebServer";
-}
-void f1(int a) {
-	cout << "f1" << endl;
+void f1(){
+    cout << "Function1" << endl;
 }
 
-void f2(int a) {
-	cout << a << endl;
+void f2(){
+    cout << "Function2" << endl;
 }
 
-int f3(int a) {
-	return a - 1;
+int f3(int a, int b){
+    return a + b;
 }
 
-int f4(int a) {
-	return a * 2;
+int f4(int a, int b){
+    return a - b;
 }
 
-void show_info(string f()){
-	cout << f()<<endl;
+string GetUserName(){
+    return "UserName";
 }
-int main()
-{
-	//Указатель - это переменная, которая содержит адрес другой переменной
-	int a = 5;
-	int b = a;
-	//подставляем адрес ячейки с переменной a
-	//* - указатель & взятие адреса(ссылка)
-	int *px = &a;
-	cout << px<<endl;
-	//обратимся через разоименование
-	cout << *px<<endl;
-	int *px2 = &a;
-	cout << px << " " << px2 << endl;
-	cout << a << endl; 
-	*px2 = 2;
-	cout << a << endl;
-	///////////////////////////////////////////////////
 
-	//Указатель на функцию это переменная, которой мы можем присвоить ссылку на функцию
-	void(*pointer)(int a);//указатель для функции pointer
+string GetUserPassword(){
+    return "UserPassword";
+}
 
-	//вызовем функцию через указатель
-	pointer = f2;
-	pointer(1);
+void ShowUserInfo(string (*f)()){ // Функция в кач-ве параметра принимает указатель на функцию
+    cout << f() << endl;
+}
 
-	//создаем указатель для двух новых функций
-	int(*new_pointer)(int a);
-	new_pointer = f3;
-	cout << new_pointer(5);
-	show_info(GetDataFromWebServer);
-	_getch();
+int main() {
+    // Указатель на функцию - это переменная, которой можно присвоить ссылку на функцию
+    // Используя указатель на функцию можно добиться эффекта, похожего на полиморфизм в ООП
+
+    // Создадим указатель на ф-цию типа void
+    void (*pointer1)(); // Создали указатель, в который можно присвоить адрес функции типа void
+    pointer1 = f1;
+    pointer1(); // Указатель вызовет функцию, на которую ссылается
+    pointer1 = f2; // Теперь указатель ссылается на другую функцию
+    pointer1();
+
+    // Создадим указатель на ф - цию типа int,  c аргументами
+    int (*pointer2)(int a, int b);
+    pointer2 = f3;
+    cout << pointer2(5, 10) << endl;
+    pointer2 = f4;
+    cout << pointer2(5, 10) << endl;
+
+    // Но в таком виде указатели на ф - цию не используют.
+    // Можно просто вызвать ф - цию, которая нужна
+
+    // Пример грамотного использования указателя на функцию
+    ShowUserInfo(GetUserName);
+    ShowUserInfo(GetUserPassword);
     return 0;
 }
-
-
