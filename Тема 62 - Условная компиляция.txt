@@ -1,0 +1,42 @@
+// Тема N - Условная компиляция
+
+#include <iostream>
+#define DEBUG // достаточно просто объявить константу(можно без значения)
+//#define DEBUG2
+#define DEBUG3 -5 // если константа со значением, то проверять можно обычным #if
+
+using namespace std;
+
+int main()
+{
+    // Условная компиляция описывается с помощью директив препроцессора
+    // Т. е. код который попадет в компилятор, зависит от того, каким образом он описан в директивах препроцессора
+    
+#ifdef DEBUG  //ifdef - сокращение от if define
+    cout << "loop start" << endl;
+#endif // endif - конец области видимости ifdef
+    for(int i = 0; i < 5; i++){
+        cout << i << " ";
+    }
+    cout << endl;
+#ifdef DEBUG
+    cout << "loop end" << endl;
+#endif 
+    
+    // В условной компиляции также может быть else
+#ifdef DEBUG2
+    cout << "debug mode" << endl;
+#else
+    cout << "no debug mode" << endl;
+#endif
+    // Также в условной компиляции может быть параметр infdef (if no def)
+#ifndef DEBUG2
+    cout << "debug 2 is comment" << endl;
+#endif
+#if DEBUG3 > 0
+    cout << "debug 3 > 0" << endl;
+#else
+    cout << "debug 3 < 0" << endl;
+#endif
+    return 0;
+}
