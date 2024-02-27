@@ -1,0 +1,53 @@
+// Тема 07 - Дружественные функции и классы
+
+// Дружественные функции - это функции, которые не являются членами класса, однако имеют доступ к его закрытым членам - 
+// переменным и функциям, которые имеют спецификатор private.
+
+// Для определения дружественных функций используется ключевое слово friend.
+
+#include <iostream>
+
+using namespace std;
+
+
+class Student{
+    friend void isFreeEducation(const Student&);
+    private:
+        float averagePoint;
+    public:
+        string name; 
+        Student(string n, float avg){
+            name = n;
+            averagePoint = avg;
+        }
+        string getStudentName(){
+            return name;
+        }
+};
+
+// Создадим дружественную функцию к классу Student, которая проверяет зачислен ли студент на бесплатное обучение
+void isFreeEducation(const Student &s){
+    if (s.averagePoint > 4.0){
+        cout << "Free education" << endl;
+    }
+    else{
+        cout << "Paid education" << endl;
+    }
+}
+
+
+// Дружественные функции принимают в качестве параметра ссылку на объект Student
+
+//При этом для дружественных функций не важно, определяются они под спецификатором public или private. Для них это не имеет значения.
+
+// Определение этих функций производится вне класса. И поскольку эти функции являются дружественными, 
+// то внутри этих функций мы можем через переданную ссылку Auto обратиться ко всем его закрытым переменным.
+int main()
+{
+    Student s1("Ivan", 4.75);
+    Student s2("Sergey", 3.8);
+    isFreeEducation(s1);
+    isFreeEducation(s2);
+    //University u1("MSU");
+    return 0;
+}
