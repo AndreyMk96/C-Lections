@@ -1,0 +1,56 @@
+// Тема 10 - Управление доступом в базовых и производных классах
+#include <iostream>
+
+using namespace std;
+
+// Если переменные или функции в базовом классе являются закрытыми, то есть объявлены со спецификатором private то, 
+// производный класс хотя и наследует эти переменные и функции, но не может к ним обращаться
+
+// Однако иногда возникает необходимость в таких переменных и функциях базового класса, которые были бы доступны в производных классах, 
+// но не были бы доступны извне. То есть тот же private, только с возможностью доступа для производных классов. 
+//И именно для определения уровня доступа подобных членов класса используется спецификатор protected
+class Person
+{
+public:
+    Person(string name, int age)
+    {
+        this->name = name;
+        this->age = age;
+    }
+    // Взаимодействие с переменными с режимом доступа protected происходит также через геттеры и сеттеры
+    void setName(string n){
+        this->name = n;
+    }
+        void PrintPerson(){
+        cout << name << " " << age << endl;
+    }
+protected:
+    string name;       //  имя
+private:               // закрытые переменные - доступ из производного класса недоступен
+    int age;           // возраст
+
+};
+
+class Student: public Person // Также на доступ влияет спецификатор указанный при наследовании. 
+{
+public:
+    Student(string name, int age, string group): Person(name, age)
+    {
+        this->group = group;
+    }
+    void print()
+    {
+        std::cout << name << " " << group << std::endl;  // ! Ошибка
+    }
+private:
+    std::string group;
+};
+int main()
+{
+    Student s("Ivan", 17, "11-B");
+    s.print();
+    s.setName("Egor");
+    s.print();
+
+    return 0;
+}
