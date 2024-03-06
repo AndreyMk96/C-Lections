@@ -1,0 +1,59 @@
+// Тема 11 - Скрытие функционала базового класса
+#include <iostream>
+
+using namespace std;
+
+// Производный класс может определить функцию с тем же именем, что и функция в базовом классе, с тем же или другим списком параметров. 
+// Для компилятора такая функция будет существовать независимо от базового класса. И подобное определение функции в производном классе 
+// не будет переопределением функции из базового класса.
+class Person
+{
+public:
+    Person(string name, int age)
+    {
+        this->name = name;
+        this->age = age;
+    }
+    void print()
+    {
+        std::cout << name << " " << age << endl;  // ! Ошибка
+    }
+protected:               
+    string name;       
+    int age;           
+};
+
+class Student: public Person 
+{
+public:
+    Student(string name, int age, string group): Person(name, age)
+    {
+        this->group = group;
+    }
+    /*void print()
+    {
+        std::cout << name << " " << group << std::endl;  
+    }*/
+    void print(){
+        Person::print();
+    }
+    void print2(){
+        cout << Person::name << " " << Person::age;
+    }
+    // Функция print в Student скрывает функцию print класса Person. 
+    // Однако иногда может потребоваться возможность вызвать реализацию функции, которая определена именно в базовом классе. 
+    // В этом случае можно использовать оператор ::
+    // Также мы можем обращаться к переменным класса родителя
+private:
+    std::string group;
+};
+int main()
+{
+    Person p("Anton", 14);
+    p.print();
+    Student s("Ivan", 17, "11-B");
+    s.print();
+    s.print2();
+
+    return 0;
+}
