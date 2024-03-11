@@ -1,0 +1,59 @@
+#include <iostream>
+
+// По умолчанию компилятор при компиляции классов генерирует специальный конструктор - конструктор копирования, 
+// который позволяет создать объект на основе другого объекта (по сути копирует объект). 
+// Конструктор копирования по умолчанию копирует значения полей объекта, в новый объект
+
+// Конструктор копирования можно использовать при создании объекта на основе другого
+
+using namespace std;
+
+class Person
+{
+public:
+    // конструктор копирования класса Person
+    Person(const Person& p)
+    {
+        name = p.name;
+        age = p.age;
+    }
+    Person(std::string name, int age)
+    {
+        this->name = name;
+        this->age = age;
+    }
+    string name;
+    int age;
+};
+class Employee: public Person
+{
+public:
+    Employee(string name, int age, string company): Person(name, age)
+    {
+        this->company = company;
+    }
+    // конструктор копирования класса Employee
+    // вызываем конструктор копирования базового класса
+    Employee(const Person& p, std::string c): Person(name, age)
+    {
+        this->name = p.name;
+        this->age = p.age;
+        this->company=c;
+    }
+    void print() const
+    {
+        cout << name << " " << age << " " << company << std::endl;
+    }
+private:
+    string company;
+};
+ 
+int main()
+{
+    Person tom{"Tom", 38};
+    Person tom2{tom};
+    Employee tomas{tom, "google"};    // вызываем конструктор копирования
+    Employee andr = {"Andrey", 27, "Yandex"}; 
+    tomas.print();  // Name: Tom       Age: 38
+    andr.print();
+}

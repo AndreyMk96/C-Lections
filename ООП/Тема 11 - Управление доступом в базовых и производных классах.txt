@@ -21,10 +21,10 @@ public:
     void setName(string n){
         this->name = n;
     }
-        void PrintPerson(){
+    void print(){
         cout << name << " " << age << endl;
     }
-protected:
+protected: //private
     string name;       //  имя
 private:               // закрытые переменные - доступ из производного класса недоступен
     int age;           // возраст
