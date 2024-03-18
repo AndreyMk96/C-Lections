@@ -1,0 +1,92 @@
+// Тема 15 Многоуровневое наследование
+
+// Множественное наследование позволяет порожденному классу наследовать элементы более, чем от одного базового класса. 
+// Синтаксис заголовков классов расширяется так, чтобы разрешить создание списка базовых классов и обозначения их уровня доступа:
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+ 
+class Person
+{
+public:
+string person_name;
+    int person_age;
+    Person(string name, int age)
+    {
+        this->person_name = name;
+        this->person_age = age;
+    }
+    Person(const Person& p)
+    {
+        this->person_name = p.person_name;
+        this->person_age = p.person_age;
+    }
+    
+    void print(){
+        cout << person_name << " " << person_age << endl;
+    }
+};
+ 
+class Student:public Person
+{
+public:
+    string student_name;
+    int student_age;
+    string student_group;
+    Student(string name, int age, string group):Person(person_name, person_age)
+    {
+        this->student_name = name;
+        this->student_age = age;
+        this->student_group = group;
+    }
+    Student(Person& p, string group):Person(person_name, person_age)
+    {
+        this->student_name = p.person_name;
+        this->student_age = p.person_age;
+        this->student_group = group;
+    }
+    void print(){
+        cout << student_name << " " << student_age << " " << student_group << endl;
+    }
+};
+ 
+// Teacher открыто наследует Person и Student
+class Teacher: public Person, public Student
+{
+private:
+    int teachesGrade;
+    string teacher_name;
+    int teacher_age;
+    string teacher_group;
+public:
+    Teacher(string name, int age, string group, int teachesGrade):Person(name, age), Student(name, age, group)
+    {
+        this->teacher_name = name;
+        this->teacher_age = age;
+        this->teacher_group = group;
+        this->teachesGrade = teachesGrade;
+    }
+    void print(){
+        cout << teacher_name << " " << teacher_age << " " << teacher_group << " " << teachesGrade << endl;
+    }
+};
+
+int main()
+{
+    Person p("Ivan", 18);
+    p.print();
+    Student s("Ivan", 18, "11-B");
+    s.print();
+    Teacher t("Ivan", 18, "11-B", 5);
+    t.print();
+    cout << "---------------------------------"<<endl;
+    Person new_p {p};
+    new_p.print();
+    Student new_s {new_p, "9-A"};
+    new_s.print();
+    
+ 
+    return 0;
+}
