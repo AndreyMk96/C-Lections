@@ -1,73 +1,85 @@
 // Тема 14 - Множественное наследование. Конструкторы и деструкторы
 
+// Создадим пример темы "Животные", где у нас будет класс Animal с базовыми характеристиками животного, 
+// классы Bird и Fish будут наследоваться от класса Animal, а также класс FlyingFish, который будет наследоваться как от Bird, 
+// так и от Fish. В каждом из этих классов будут приватные переменные и конструкторы для их инициализации.
+
+// В этом примере мы создаем классы Animal, Bird, Fish и FlyingFish, где каждый класс имеет свои уникальные приватные 
+// переменные и конструкторы для их инициализации. Класс FlyingFish демонстрирует множественное наследование от классов 
+// Bird и Fish.
+
 #include <iostream>
+#include <string>
 
-using namespace std;
- 
-class Book    // класс книги
-{
-public:
-    Book(int pages)
-    {
-        cout << "Book created" << endl;
-    }
-    ~Book()
-    {
-        cout << "Book deleted" << endl;
-    }
-    void printPageCount()
-    {
-        cout << pages << " pages" << endl;
-    }
+class Animal {
 private:
-    int pages; // количество страниц
-};
- 
-class File    // класс электронного файла
-{
+    std::string species;
+    int age;
+
 public:
-    File(float size)
-    {
-        cout << "File created" << endl;
+    Animal(const std::string& species, int age) : species(species), age(age) {}
+
+    void displayInfo() {
+        std::cout << "Species: " << species << ", Age: " << age << std::endl;
     }
-    ~File()
-    {
-        cout << "File deleted" << endl;
-    }
-    void printSize()
-    {
-        std::cout << size << "Mb" << std::endl;
-    }
-private:
-    float size;  // размер файла
 };
 
-// класс электронной книги
-class Ebook : public Book, public File   
-{
-public:
-    Ebook(string title, int pages, float size): Book(pages), File(size), title(title)
-    {
-        cout << "Ebook created" << endl;
-    }
-    ~Ebook()
-    {
-        cout << "Ebook deleted" << endl;
-    }
-    void printTitle()
-    {
-        std::cout << "Title: " << title << std::endl;
-    }
+class Bird : public Animal {
 private:
-    string title;  // название книги
+    std::string featherColor;
+
+public:
+    Bird(const std::string& species, int age, const std::string& featherColor)
+        : Animal(species, age), featherColor(featherColor) {}
+
+    void displayInfo() {
+        Animal::displayInfo();
+        std::cout << "Feather Color: " << featherColor << std::endl;
+    }
 };
 
-// Если базовые классы Book и File имеют функцию с одним и тем же именем получается двойственность, и такой код просто не скомпилируется.
- 
-int main()
-{
-    Ebook cppbook {"About C++", 320, 5.6};
-    cppbook.printTitle();
-    cppbook.printPageCount();
-    cppbook.printSize();
+class Fish : public Animal {
+private:
+    std::string scaleColor;
+
+public:
+    Fish(const std::string& species, int age, const std::string& scaleColor)
+        : Animal(species, age), scaleColor(scaleColor) {}
+
+    void displayInfo() {
+        Animal::displayInfo();
+        std::cout << "Scale Color: " << scaleColor << std::endl;
+    }
+};
+
+class FlyingFish : public Bird, public Fish {
+private:
+    std::string ability;
+
+public:
+    FlyingFish(const std::string& species, int age, const std::string& featherColor,
+               const std::string& scaleColor, const std::string& ability)
+        : Bird(species, age, featherColor), Fish(species, age, scaleColor), ability(ability) {}
+
+    void displayInfo() {
+        Bird::displayInfo();
+        Fish::displayInfo();
+        std::cout << "Ability: " << ability << std::endl;
+    }
+};
+
+int main() {
+    Bird sparrow("Sparrow", 2, "Brown");
+    Fish salmon("Salmon", 3, "Silver");
+    FlyingFish flyingFish("Flying Fish", 1, "Blue", "Silver", "Can fly and swim");
+
+    sparrow.displayInfo();
+    std::cout << std::endl;
+    
+    salmon.displayInfo();
+    std::cout << std::endl;
+
+    flyingFish.displayInfo();
+
+    return 0;
 }
