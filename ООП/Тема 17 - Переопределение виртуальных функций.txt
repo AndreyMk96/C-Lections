@@ -1,0 +1,69 @@
+// Тема 17 -  Переопределение виртуальных функций
+
+// Виртуальные функции в C++ используются для реализации полиморфизма, позволяя объектам различных классов вызывать одну 
+// и ту же функцию, но с различной реализацией. Вот пример виртуальной функции в C++:
+
+// В этом примере у нас есть базовый класс Shape, у которого есть виртуальная функция calculateArea(). 
+// Классы Rectangle и Circle являются наследниками от Shape и переопределяют виртуальную функцию calculateArea() 
+// для расчета площади прямоугольника и круга соответственно. При вызове метода calculateArea() через указатель 
+// на базовый класс Shape, будет вызываться соответствующая реализация виртуальной функции для каждого объекта.
+
+// Переопределение виртуальных функций происходит при помощи ключевого слова override
+
+#include <iostream>
+
+// Базовый класс
+class Shape {
+public:
+    // Виртуальная функция для вычисления площади фигуры
+    virtual double calculateArea() {
+        return 0;
+    }
+};
+
+// Класс-наследник от базового класса Shape
+class Rectangle : public Shape {
+private:
+    double width;
+    double height;
+public:
+    Rectangle(double w, double h) : width(w), height(h) {}
+
+    // Переопределение виртуальной функции calculateArea для прямоугольника
+    double calculateArea() override {
+        return width * height;
+    }
+};
+
+// Класс-наследник от базового класса Shape
+class Circle : public Shape {
+private:
+    double radius;
+public:
+    Circle(double r) : radius(r) {}
+
+    // Переопределение виртуальной функции calculateArea для круга
+    double calculateArea() override {
+        return 3.14 * radius * radius;
+    }
+};
+
+int main() {
+    Rectangle r(5, 3);
+    Circle c(4);
+    Shape* shape1 {&r};
+    Shape* shape2 {&c};
+    
+    // Также объекты в которых переопределяются функции, можно обьявлять динамически
+    //Shape* shape1 = new Rectangle(5, 3);
+    //Shape* shape2 = new Circle(4);
+
+
+    std::cout << "Площадь прямоугольника: " << shape1->calculateArea() << std::endl;
+    std::cout << "Площадь круга: " << shape2->calculateArea() << std::endl;
+
+    //delete shape1;
+    //delete shape2;
+
+    return 0;
+}
