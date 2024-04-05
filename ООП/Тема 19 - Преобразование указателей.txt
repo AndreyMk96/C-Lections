@@ -1,0 +1,51 @@
+// Тема 19 - Преобразование указателей
+
+#include <iostream>
+
+using namespace std;
+ 
+class Person
+{
+public:
+    Person(string name): name{name} {  }
+    virtual void print() 
+    {
+        cout << name << endl;
+    }
+    string getName()  {
+        return name;
+    }
+private:
+    string name;
+};
+ 
+class Student: public Person
+{
+public:
+    Student(string name, string company): Person{name}{
+        this->company = company;
+    }
+    void print() override
+    {
+        cout << getName() << " (" << company << ")" << endl;
+    }
+    string getCompany(){
+        return company;
+    }
+private:
+    string company;
+};
+int main()
+{
+    Student bob{"Bob", "Google"};
+    // преобразуем в указатель на базовый тип
+    Person* person{&bob};
+    person->print();    // Bob (Google)
+    // В данном случае указатель на объект Person получает адрес объекта Student.
+    // Подобным образом можно создать указатель производного класса и преобразовать автоматически в указатель на базовый тип
+    Student* s = &bob;
+ 
+    // преобразуем в указатель на базовый тип
+    Person* person2{s};
+    person->print();    // Bob (Google)
+}

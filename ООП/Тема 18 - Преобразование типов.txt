@@ -1,0 +1,55 @@
+// Объект производного класса одновременно является объектом базового класса. 
+// Поэтому преобразования из производного типа в базовый выполняются автоматически.
+
+#include <iostream>
+
+using namespace std;
+ 
+class Person
+{
+public:
+    Person(string name)
+    {
+        this->name = name;
+    }
+    void print()
+    {
+        std::cout << "Person " << name << std::endl;
+    }
+private:
+    std::string name;
+};
+ 
+class Student: public Person
+{
+public:
+    Student(string name): Person{name} {
+        
+    }
+};
+ 
+int main()
+{
+    // Здесь класс Person является базовым, а Student производным. 
+    // Поэтому компилятор может автоматически преобразовать объект Student в тип Person. 
+    // Это можно сделать с помощью конструктора копирования:
+    Student s{"Bob"};
+    s.print();    // Person: Bob
+ 
+    // преобразуем в базовый тип
+    Person person1{s};    // через конструктор копирования
+    person1.print();        // Person: Bob
+ 
+    Person person2{"Tom"};
+    person2 = s;   // через операцию присваивания
+    person2.print();        // Person: Bob
+    
+    // Но также можно выполнять преобразования явным образом, например, с помощью функции static_cast():
+    // преобразуем в базовый тип
+    Person person3{static_cast<Person>(s)};    // через конструктор копирования
+    person3.print();        // Person: Bob
+ 
+    Person person4{"Tom"};
+    person4 = static_cast<Person>(s);   // через операцию присваивания
+    person4.print();        // Person: Bob
+}
