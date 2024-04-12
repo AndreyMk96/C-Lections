@@ -1,0 +1,85 @@
+// Тема 20 - Абстрактные классы
+
+// Абстрактные классы - это классы, которые содержат или наследуют без переопределения хотя бы одну чистую виртуальную функцию. 
+// Абстрактный класс определяет интерфейс для переопределения производными классами.
+// Создание экземпляров абстрактных классов запрещено
+
+// Что такое чистые виртуальные функции (pure virtual functions)? Это функции, которые не имеют определения. 
+// Цель подобных функций - просто определить функционал без реализации, а реализацию определят производные классы. 
+// Чтобы определить виртуальную функцию как чистую, ее объявление завершается значением "=0". 
+// Например, определим абстрактный класс, который представляет геометрическую фигуру:
+
+// В каждом наследующем классе методы абстрактного класса переопределяется
+
+// Стоит отметить, что абстрактный класс может определять и обычные функции и переменные, может иметь несколько конструкторов, 
+// но при этом нельзя создавать объекты этого абстрактного класса. Например:
+
+// Если в производном классе не переопределить абстрактный метод, то унаследуемтся абстрактный метод из базового класса
+
+#include <iostream>
+using namespace std;
+   
+class Shape
+{
+public:
+    Shape(int x, int y): x{x}, y{y}
+    {}
+    virtual double getSquare() const = 0;     // площадь фигуры
+    virtual double getPerimeter() const = 0;  // периметр фигуры
+    void printCoords() const
+    {
+        cout << "X: " << x << "\tY: " << y << endl;
+    }
+private:
+    int x;
+    int y;
+};
+
+class Rectangle : public Shape  // класс прямоугольника
+{
+public:
+    Rectangle(int x, int y, double w, double h) : Shape{x, y}, width(w), height(h)
+    { }
+    double getSquare() const override  // Не забываем про override у переопределяемых методов
+    {
+        return width * height;
+    }
+    double getPerimeter() const override
+    {
+        return width * 2 + height * 2;
+    }
+private:
+    double width;   // ширина
+    double height;  // высота
+};
+
+class Circle : public Shape     // круг
+{
+public:
+    Circle(int x, int y, double r) : Shape{x, y}, radius(r) 
+    { }
+    double getSquare() const override
+    {
+        return radius * radius * 3.14;
+    }
+    double getPerimeter() const override
+    {
+        return 2 * 3.14 * radius;
+    }
+private:
+    double radius;  // радиус круга
+};
+  
+int main()
+{
+    Rectangle rect{0, 0, 30, 50};
+    rect.printCoords();     // X: 0    Y: 0
+    cout << "Rectangle square: " << rect.getSquare() << std::endl;
+    cout << "Rectangle perimeter: " << rect.getPerimeter() << std::endl;
+ 
+    Circle circle{10, 20, 30};
+    circle.printCoords();   // X: 10   Y: 20
+    cout << "Circle square: " << circle.getSquare() << std::endl;
+    cout << "Circle perimeter: " << circle.getPerimeter() << std::endl;
+}
+

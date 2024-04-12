@@ -1,0 +1,28 @@
+// Тема 07 - Ключевое слово explicit
+
+#include <iostream> // cout
+using namespace std;
+
+// explicit ключевое слово С++ применяемое для запрещения неявных преобразований при вызове конструктора
+
+class Print{
+public:
+    // Если же в конструкторе будет ключевое слово explicit, то будет выдана ошибка компиляции. 
+    // Рекомендуется любые конструкторы с одним параметром обозначать как explicit
+    explicit Print(int i){
+    //Print(int i){
+        cout << i << endl;
+    }
+};
+
+void func(Print pr){
+    cout << "function called" << endl;
+}
+
+int main(){
+    //func(3); //3 несмотря на то что требуется передать объект Print, будет неявно вызван конструктор
+    Print p(1);
+    func(p);  // Работает корректно
+    
+}
+
