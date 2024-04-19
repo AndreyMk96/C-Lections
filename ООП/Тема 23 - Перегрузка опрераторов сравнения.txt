@@ -1,0 +1,84 @@
+// Тема 23 - Перегрузка операторов сравнения
+
+// Результатом операторов сравнения (==, !=, <, >), как правило, является значение типа bool. 
+// Например, перегрузим данные операторы для типа Counter
+
+#include <iostream>
+  
+class Counter
+{
+public:
+    Counter(int val)
+    {
+        value =val;
+    }
+    void print() 
+    {
+        std::cout << "Value: " << value << std::endl;
+    }
+    bool operator == (const Counter& counter) const
+    {
+        return value == counter.value;
+    }
+    bool operator != (const Counter& counter) const
+    {
+        return value != counter.value;
+    }
+    bool operator > (const Counter& counter) const
+    {
+        return value > counter.value;
+    }
+    bool operator < (const Counter& counter) const
+    {
+        return value < counter.value;
+    }
+    // оператор присвоения
+    Counter& operator += (const Counter& counter)
+    {
+        value += counter.value;
+        return *this;   // возвращаем ссылку на текущий объект
+    }
+    // префиксные операторы
+    // Префиксные операторы должны возвращать ссылку на текущий объект, который можно получить 
+    // с помощью указателя this:
+    Counter& operator++ ()
+    {
+        value += 1;
+        return *this;
+    }
+    // постфиксные операторы
+    // Постфиксные операторы должны возвращать значение объекта до инкремента, то есть предыдущее состояние объекта. 
+    // Поэтому постфиксная форма возвращает копию объекта до инкремента:
+    Counter operator++ (int)
+    {
+        Counter copy {*this};
+        ++(*this);
+        return copy;
+    }
+private:
+    int value;
+};
+
+//Если речь идет о простом сравнении на основе полей класса, то для операторов == и != 
+// проще использовать специальный оператор default (Подробнее в след уроке):
+// bool operator == (const Counter& counter) const = default;
+// bool operator != (const Counter& counter) const = default;
+ 
+  
+int main()
+{
+    Counter c1(20);
+    Counter c2(10);
+    bool b1 = c1 == c2;     // false
+    bool b2 = c1 > c2;   // true
+  
+    std::cout << "c1 == c2 = " << std::boolalpha << b1 << std::endl;    // c1 == c2 = false
+    std::cout << "c1 > c2 = " << std::boolalpha << b2 << std::endl;     // c1 > c2 = true
+    
+    c1 += c2;
+    c1.print();     // Value: 70
+    Counter c3 = c1++;
+    c1.print(); // Изменится именно С1
+    ++c1;
+    c1.print();
+}
