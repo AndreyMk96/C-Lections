@@ -1,0 +1,54 @@
+// Тема 26 - Преобразования между классами 
+
+// Подобным образом можно выполнить преобразование между классами
+
+#include <iostream>
+using namespace std;
+class PrintBook;
+ 
+// электронная книга
+class Ebook
+{
+public:
+    Ebook(string book_title)
+    {
+        title=book_title;
+    }
+    operator PrintBook() const; // Переопределение оператора преобразования
+    string getTitle(){
+        return title;
+    }
+private:
+    string title;
+};
+// печатная книга
+class PrintBook
+{
+public:
+    PrintBook(string book_title)
+    {
+        title=book_title;
+    }
+    operator Ebook() const;
+    string getTitle(){return title;}
+private:
+    string title;
+};
+ 
+Ebook::operator PrintBook() const
+{
+    return PrintBook{title};
+}
+PrintBook::operator Ebook() const
+{
+    return Ebook{title};
+}
+ 
+int main()
+{
+    PrintBook book{"C++"};
+    Ebook ebook{ book };    // оцифровываем книгу - из PrintBook в Ebook
+    cout << ebook.getTitle() << std::endl;        // C++
+    PrintBook print_book{ebook}; // распечатываем книгу из Ebook в PrintBook
+    cout << print_book.getTitle() << std::endl;        // C++
+}

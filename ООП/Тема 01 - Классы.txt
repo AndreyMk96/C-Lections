@@ -1,13 +1,7 @@
 // Тема 01 - Классы
 
 /* Кроме использования встроенных типов, таких как int, double и т.д., мы можем определять свои собственные типы или классы. 
-Класс представляет составной тип, который может использовать другие типы.
-Класс предназначен для описания некоторого типа объектов. То есть по сути класс является планом объекта. 
-А объект представляет конкретное воплощение класса, его реализацию. */
-
-#include <iostream>
-
-using namespace std;
+Класс представляет составной тип, который может использовать другие типы, Другими словами Класс - это пользовательский тип данных*/
 
 //Для определения класса применяется ключевое слово class, после которого идет имя класса:
 
@@ -18,32 +12,36 @@ using namespace std;
 // Также стоит обратить внимание на модификатор доступа public:, который указывает, что идущие после него 
 // переменные и функции будут доступны извне, из внешнего кода
 
+#include <iostream>
+using namespace std;
 class Person 
+// Внутри фигурных скобок тело класса
 {
 public:
-    std::string name;
-    unsigned age;
+    string name;
+    int age;
     // Также переменные можно инициализирвать внутри класса
-    std::string surname = "Ivanov";
+    string surname = "Ivanov";
     void print() 
     {
-        std::cout << "Name: " << name << " " << "Surname: " << surname << " " << "Age: " << age << endl;
+        cout << "Name: " << name << " " << "Surname: " << surname << " " << "Age: " << age << endl;
     }
 };
 
 
 int main()
 {
+    // Создаем экземпляр класса
     Person person;
     // устанавливаем значения полей класса
     person.name = "Tom";
     person.age = 38;
     // вызываем функцию класса
     person.print();
-    std::string username = person.name;
-    unsigned userage = person.age;
+    string username = person.name;
+    int userage = person.age;
     // выводим полученные данные на консоль
-    std::cout << "Name: " << username << "\tAge: " << userage << std::endl;
+    cout << "Name: " << username << "\tAge: " << userage << std::endl;
     
     /*На объекты классов, как и на объекты других типов, можно определять указатели. 
     Затем через указатель можно обращаться к членам класса - переменным и методам. 
@@ -57,7 +55,7 @@ int main()
     ptr->age = 22;
     ptr->print();
     // обращаемся к полям объекта
-    std::cout << "Name: " << person2.name << "\tAge: " << person2.age << std::endl;
+    cout << "Name: " << person2.name << "\tAge: " << person2.age << std::endl;
     
     // Задачи
     
