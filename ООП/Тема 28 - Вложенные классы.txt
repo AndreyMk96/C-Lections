@@ -1,0 +1,54 @@
+// Тема 28 - Вложенные классы
+
+// Вложенный класс (nested class) — это класс, определение которого находится внутри другого класса. 
+// Обычно вложенные классы применяются для описания таких сущностей, которые могут существовать только 
+// в рамках объекта внешнего класса, особенно когда внешний класс работает с набором объектов вложенного класса.
+
+#include <iostream>
+
+using namespace std;
+
+// Здесь класс Person представляет класс пользователя. А данные его учетной записи выделены в отдельный класс - Account. 
+// Класс Account определен как приватный. Таким образом, обращаться к этому классу мы сможем только внутри класса Person. 
+class Person
+{
+private:
+    string name;
+    
+    // Во вложенных классах также можно использовать специафикаторы доступа. 
+    // В данном случае поля email и password и конструктор определены как публичные, 
+    // общедоступные, чтобы их можно было использовать в классе Person вне класса Account. 
+    // Тем более, что так как класс Account - приватный, эти поля все равно недоступны из вне класса Person.
+    
+    // В примере выше объекты Account нельзя создавать или использовать вне класса Person, так как класс 
+    // Account является приватным. Однако мы можем также сделать его общедоступным и после этого обращаться к нему вне класса Person:
+    class Account   // вложенный класс
+    {
+    public:
+        Account(const std::string& p_email, const std::string& p_password)
+        {
+            email = p_email;
+            password = p_password;
+        }
+        string email;
+        string password;
+    };
+    Account account{"", ""};    // переменная вложенного класса Account
+public:
+    Person(const string& p_name, const string& p_email, const string& p_password)
+    {
+        name = p_name;
+        account = Account(p_email, p_password);
+    }
+    void print()
+    {
+        cout<<"Name: " << name << "\n" << "Email: " << account.email << "\n"
+        << "Password: " << account.password << std::endl; 
+    }
+};
+ 
+int main()
+{
+    Person tom{"Tom", "tom@gmail.com", "qwerty"};
+    tom.print();
+}
