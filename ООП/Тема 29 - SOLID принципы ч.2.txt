@@ -1,0 +1,66 @@
+//Тема 29 - Принцип единственной ответственности (Single Responsibility Principle)
+
+#include <iostream>
+#include <string>
+
+/*Принцип единственной ответственности (Single Responsibility Principle) является одним из принципов SOLID, 
+который предлагает, чтобы каждый класс имел только одну причину для изменения. Это означает, что класс должен 
+быть ответственен только за один аспект функциональности программы.*/
+
+using namespace std;
+
+// Класс, нарушающий принцип единственной ответственности
+class Employee {
+public:
+    Employee(const string& name, int id) : name(name), id(id) {}
+
+    void saveToDatabase() {
+        // Сохранение сотрудника в базу данных
+        cout << "Сохранение сотрудника " << name << " в базу данных.\n";
+    }
+
+    void generateReport() {
+        // Генерация отчета о сотруднике
+        cout << "Генерация отчета о сотруднике " << name << ".\n";
+    }
+
+private:
+    string name;
+    int id;
+};
+
+// Класс, следующий принципу единственной ответственности
+class EmployeeDatabase {
+public:
+    void saveEmployee(const string& name, int id) {
+        // Сохранение сотрудника в базу данных
+        cout << "Сохранение сотрудника " << name << " в базу данных.\n";
+    }
+};
+
+class EmployeeReport {
+public:
+    void generateReport(const string& name) {
+        // Генерация отчета о сотруднике
+        cout << "Генерация отчета о сотруднике " << name << ".\n";
+    }
+};
+
+/*В этом примере класс Employee нарушает принцип единственной ответственности, так как он отвечает как за сохранение сотрудника 
+в базу данных, так и за генерацию отчета. В то же время, классы EmployeeDatabase и EmployeeReport следуют принципу единственной 
+ответственности, так как каждый из них отвечает только за одну функцию: сохранение сотрудника в базу данных и генерацию отчета 
+соответственно.*/
+
+int main() {
+    Employee employee("Иванов", 1);
+    employee.saveToDatabase();
+    employee.generateReport();
+
+    EmployeeDatabase employeeDB;
+    employeeDB.saveEmployee("Петров", 2);
+
+    EmployeeReport employeeReport;
+    employeeReport.generateReport("Сидоров");
+
+    return 0;
+}
