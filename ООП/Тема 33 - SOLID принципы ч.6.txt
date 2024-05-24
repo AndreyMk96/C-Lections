@@ -1,0 +1,76 @@
+//Тема 33 - SOLID - принципы ч. 6
+
+/*Принцип инверсии зависимостей (Dependency Inversion Principle, DIP) - это один из принципов SOLID, который гласит, 
+что модули верхнего уровня не должны зависеть от модулей нижнего уровня. Оба типа модулей должны зависеть от абстракций. 
+Кроме того, абстракции не должны зависеть от деталей, а детали должны зависеть от абстракций.*/
+
+
+//В этом примере классы Light и Fan представляют детали, которые зависят от абстракции Switchable. 
+//Класс Switch верхнего уровня также зависит от абстракции Switchable, что соответствует принципу инверсии зависимостей.
+
+#include <iostream>
+
+// Абстракция
+class Switchable {
+public:
+    virtual void turnOn() = 0;
+    virtual void turnOff() = 0;
+};
+
+// Детали
+class Light {
+public:
+    void turnOn() {
+        std::cout << "Light is on" << std::endl;
+    }
+
+    void turnOff() {
+        std::cout << "Light is off" << std::endl;
+    }
+};
+
+class Fan {
+public:
+    void turnOn() {
+        std::cout << "Fan is on" << std::endl;
+    }
+
+    void turnOff() {
+        std::cout << "Fan is off" << std::endl;
+    }
+};
+
+// Модуль верхнего уровня, который зависит от абстракции
+class Switch {
+private:
+    Switchable& device;
+
+public:
+    Switch(Switchable& device) : device(device) {}
+
+    void toggle() {
+        if (isOn) {
+            device.turnOff();
+            isOn = false;
+        } else {
+            device.turnOn();
+            isOn = true;
+        }
+    }
+
+private:
+    bool isOn = false;
+};
+
+int main() {
+    Light light;
+    Fan fan;
+
+    Switch lightSwitch(light);
+    Switch fanSwitch(fan);
+
+    lightSwitch.toggle(); // Включаем свет
+    fanSwitch.toggle();   // Включаем вентилятор
+
+    return 0;
+}
