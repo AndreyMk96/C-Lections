@@ -1,0 +1,60 @@
+// Тема 32 - SOLID - принципы, ч. 5
+
+/*Принцип разделения интерфейса (Interface Segregation Principle, ISP) является одним из принципов SOLID и заключается в том, 
+что клиенты не должны зависеть от интерфейсов, которые они не используют. Более конкретно, это означает, что интерфейсы должны 
+быть разделены на более мелкие и специфические, чтобы клиенты могли реализовывать только те методы, которые им нужны.*/
+
+// В этом примере интерфейсы Copyable и Printable разделены на более мелкие и специфические, что позволяет классу OfficeWorker 
+// использовать только те методы, которые ему нужны. Это соответствует принципу разделения интерфейса (ISP).
+#include <iostream>
+
+// Интерфейс для устройств с возможностью копирования
+class Copyable {
+public:
+    virtual void copy() = 0;
+};
+
+// Интерфейс для устройств с возможностью печати
+class Printable {
+public:
+    virtual void print() = 0;
+};
+
+// Класс копира, реализующий интерфейс Copyable
+class Copier : public Copyable {
+public:
+    void copy() override {
+        std::cout << "Копируем документ\n";
+    }
+};
+
+// Класс принтера, реализующий интерфейс Printable
+class Printer : public Printable {
+public:
+    void print() override {
+        std::cout << "Печатаем документ\n";
+    }
+};
+
+// Класс, использующий устройства для копирования и печати
+class OfficeWorker {
+public:
+    void operateCopyMachine(Copyable& device) {
+        device.copy();
+    }
+
+    void operatePrinter(Printable& device) {
+        device.print();
+    }
+};
+
+int main() {
+    Copier copier;
+    Printer printer;
+
+    OfficeWorker worker;
+    worker.operateCopyMachine(copier); // Копируем документ
+    worker.operatePrinter(printer); // Печатаем документ
+
+    return 0;
+}
