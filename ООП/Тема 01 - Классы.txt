@@ -22,6 +22,7 @@ public:
     int age;
     // Также переменные можно инициализирвать внутри класса
     string surname = "Ivanov";
+    // Функции внутри класса называются его методами
     void print() 
     {
         cout << "Name: " << name << " " << "Surname: " << surname << " " << "Age: " << age << endl;
