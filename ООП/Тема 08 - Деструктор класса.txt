@@ -1,0 +1,51 @@
+/*Тема 07 - Деструктор*/
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+// Деструктор - это функция которая вызывается при удалении объекта класса(противоположность конструктору)
+// Как пример, уничтожение объекта происходит, когда он выходит из зоны видимости
+
+class Student{
+private:
+    string name;
+    int *points;
+public:
+    Student(string n){
+        name = n;
+        points = new int[5];
+        cout << "student " << name << " created" << endl;
+    }
+    
+    // Создание деструктора
+    ~Student(){
+        cout << "student " << name << " expelled" << endl;
+        // В деструкторе очищаем приватные поля, так как снаружи мы не можем получить к ним доступ
+        delete[] points;
+    }
+    // В классе может быть только один деструктор(либо деструктор по умолчанию)
+    // В деструктор не могут передаваться параметры
+};
+
+void CreateStudent(){
+    // Видно, что деструктор вызывается после завершения функции
+    cout << "function started" << endl;
+    Student s3("Egor");
+    cout << "function ended" << endl;
+}
+
+// Пример использования деструктора с массивом классов
+void addPoint(){
+    int *students;
+}
+
+int main()
+{
+    Student s1("Ivan"); // Создадим объект класса
+    Student s2("Andrey");
+    // Видно, что объекты уничтожаются в обратном порядке
+    // Создадим объект внутри функции
+    CreateStudent();
+    return 0;
+}
