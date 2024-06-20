@@ -1,0 +1,35 @@
+/*Тема 09 - Ключевое слово this*/
+
+#include <iostream>
+using namespace std;
+
+// Ключевое слово this - это указатель объекта на самого себя
+// this хранит адрес объекта в памяти
+// Снаружи класса this использовать нельзя
+
+class Point{
+private:
+    int x;
+    int y;
+public:
+Point(int x, int y){
+    // Через this можно получить доступ ко всему функционалу, который есть в объекте
+    // Теперь параметры в класс можно называть также как и поля класса
+    this->x = x;
+    this->y = y;
+    cout << this << endl; // Видно что выводится адрес памяти
+    }
+    
+    void Print(){
+        cout << x << " " << y << endl;
+    }
+};
+
+int main()
+{
+    Point a(5, 10); 
+    Point b(10, 15);
+    a.Print();
+    b.Print();
+    return 0;
+}
