@@ -1,41 +1,42 @@
-// Тема 23 - Перегрузка операторов сравнения
+// Тема 12 - Перегрузка операторов сравнения
 
 // Результатом операторов сравнения (==, !=, <, >), как правило, является значение типа bool. 
 // Например, перегрузим данные операторы для типа Counter
 
 #include <iostream>
+using namespace std;
   
 class Counter
 {
 public:
     Counter(int val)
     {
-        value =val;
+        this->value = val;
     }
     void print() 
     {
-        std::cout << "Value: " << value << std::endl;
+        cout << "Value: " << value << std::endl;
     }
     bool operator == (const Counter& counter) const
     {
-        return value == counter.value;
+        return this->value == counter.value;
     }
     bool operator != (const Counter& counter) const
     {
-        return value != counter.value;
+        return this->value != counter.value;
     }
     bool operator > (const Counter& counter) const
     {
-        return value > counter.value;
+        return this->value > counter.value;
     }
     bool operator < (const Counter& counter) const
     {
-        return value < counter.value;
+        return this->value < counter.value;
     }
     // оператор присвоения
     Counter& operator += (const Counter& counter)
     {
-        value += counter.value;
+        this->value += counter.value;
         return *this;   // возвращаем ссылку на текущий объект
     }
     // префиксные операторы
@@ -43,13 +44,13 @@ public:
     // с помощью указателя this:
     Counter& operator++ ()
     {
-        value += 1;
+        this->value += 1;
         return *this;
     }
     // постфиксные операторы
     // Постфиксные операторы должны возвращать значение объекта до инкремента, то есть предыдущее состояние объекта. 
     // Поэтому постфиксная форма возвращает копию объекта до инкремента:
-    Counter operator++ (int)
+    Counter operator ++ (int) //Передаваемое значение нужно чтобы компилятор отличал форму инкремента
     {
         Counter copy {*this};
         ++(*this);

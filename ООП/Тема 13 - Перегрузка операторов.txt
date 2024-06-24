@@ -1,4 +1,4 @@
-// Тема 22 - Перегрузка операторов
+// Тема 11 - Перегрузка операторов
 
 // Перегрузка операторов (operator overloading) позволяет определить для объектов классов втроенные операторы, такие как +, -, * и т.д. 
 // Для определения оператора для объектов своего класса, необходимо определить функцию, название которой содержит слово operator и символ перегружаемого оператора. 
@@ -20,22 +20,23 @@ class Counter
 public:
     Counter(int val)
     {
-        value =val;
+        value = val;
     }
     void print() 
     {
         std::cout << "Value: " << value << std::endl;
     }
     // Здесь в классе Counter определен оператор сложения, цель которого сложить два объекта Counter:
-    Counter operator + (const Counter& counter) const
+    // Тип возвращаемого значения тоже Counter
+    Counter operator + (const Counter& counter) const // Принимаем константную ссылку на объект класса
     {
-        return Counter{value + counter.value};
+        return Counter{this->value + counter.value};
     }
     // Стоит отметить, что необязательно возвращать объект класса. 
     // Это может быть и любой объект в зависимости от ситуации. И также мы можем определять дополнительные перегруженные функции операторов:
     int operator + (int number) const
     {
-        return value + number;
+        return this->value + number;
     }
 private:
     int value;
@@ -47,6 +48,6 @@ int main()
     Counter c2{10};
     Counter c3 = c1 + c2; // Если нет перегрузки, то будет ошибка
     c3.print();   // Value: 30
-    Counter c4 = c3 + 10;
+    Counter c4 = c3.operator+(10); // Полная запись оператора выглядит так
     c4.print();   // Value: 40
 }

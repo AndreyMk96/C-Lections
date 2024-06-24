@@ -1,0 +1,45 @@
+// Тема 06 - Динамические массивы классов
+
+#include <iostream>
+#include <vector>
+
+class Student {
+public:
+  std::string name;
+  int age;
+};
+
+int main() {
+  Student* students = new Student[3];
+
+  students[0].name = "Иван";
+  students[0].age = 20;
+
+  students[1].name = "Мария";
+  students[1].age = 21;
+
+  students[2].name = "Петр";
+  students[2].age = 22;
+
+  for (int i = 0; i < 3; ++i) {
+    std::cout << "Имя: " << students[i].name << std::endl;
+    std::cout << "Возраст: " << students[i].age << std::endl;
+    std::cout << std::endl;
+  }
+
+  delete[] students;
+  
+  std::vector<Student> students2 = {
+    {"Иван", 20},
+    {"Мария", 21},
+    {"Петр", 22},
+  };
+
+  for (const Student& student : students2) {
+    std::cout << "Имя: " << student.name << std::endl;
+    std::cout << "Возраст: " << student.age << std::endl;
+    std::cout << std::endl;
+  }
+
+  return 0;
+}
