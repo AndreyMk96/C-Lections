@@ -1,0 +1,33 @@
+/*Тема 17 - Определение методов вне класса*/
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+// Определение методов вне класса используется для удобства при больших методах или большом количестве методов в классе
+// Также при определении методов вне класса, класс можно разбить на файлы
+//
+class Test{
+private:
+    string name;
+public:
+    Test(string name); // Прототип конструктора
+    void Print(); // Прототип метода
+};
+
+// Реализацию конструктора можно вынести вне класса
+Test::Test(string name){
+    this->name = name;
+}
+
+// Реализация метода вне класса
+void Test::Print(){
+    cout << name << endl;
+}
+
+int main()
+{
+    Test t("Egor");
+    t.Print();
+    return 0;
+}
