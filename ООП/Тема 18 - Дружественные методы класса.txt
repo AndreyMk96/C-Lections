@@ -1,0 +1,44 @@
+/*Тема 18 - Дружественные методы класса*/
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Apple; // Чтобы Human видел Apple обьявим его протоитп
+
+class Human{
+public:
+    // Чтобы метод получил доступ к полям класса Apple, его необходимо объявить дружственным
+    // Однако при компиляции все равно выходит ошибка. Решение - объявить метод вне класса
+    /*void EatApple(Apple &a){
+        cout << a.colour << "apple has been eaten" << endl;
+    }*/
+    void EatApple(Apple &a);
+};
+
+class Apple{
+private:
+    int weight;
+    string colour;
+    friend void Human::EatApple(Apple &a);
+public:
+    Apple(int weight, string colour){
+        this->weight = weight;
+        this->colour = colour;
+    }
+};
+
+
+int main()
+{
+    Apple a(200, "Red");
+    Human h;
+    h.EatApple(a);
+
+    return 0;
+}
+
+void Human::EatApple(Apple &a){
+        cout << a.colour << " apple has been eaten" << endl;
+    }
