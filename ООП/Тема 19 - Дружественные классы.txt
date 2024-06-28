@@ -1,0 +1,52 @@
+/*Тема 19 - Дружественные классы*/
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Apple;
+
+// Класс необходимо обьявлять дружественным, при необходимости использования всех(а не конкретных),
+// Полей и методов этого класса в другом классе.
+class Human{
+public:
+// Human имеет доступ ко всем методам дружественного класса
+// Параметры принимаются по ссылке, для уменьшения расхода памяти
+// По ссылке передается адрес памяти объекта
+    void EatApple(Apple &a);
+    void BuyApple(Apple &a);
+};
+
+class Apple{
+    friend Human; //Классу Human будут доступны поля класса Apple
+private:
+    int weight;
+    string colour;
+    friend void Human::EatApple(Apple &a);
+public:
+    Apple(int weight, string colour){
+        this->weight = weight;
+        this->colour = colour;
+    }
+};
+
+
+int main()
+{
+    Apple a(200, "Red");
+    // Через экземпляр класса невозможно обратиться к приватным полям дружественного класса
+    Human h;
+    h.BuyApple(a);
+    h.EatApple(a);
+    return 0;
+}
+
+void Human::EatApple(Apple &a){
+        cout << a.colour << " apple has been eaten" << endl;
+    }
+    
+void Human::BuyApple(Apple &a){
+        cout << a.colour << " apple was bought" << endl;
+    }
+
