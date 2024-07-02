@@ -1,6 +1,6 @@
-// Тема 28 - Вложенные классы
+// Тема 22 - Вложенные классы
 
-// Вложенный класс (nested class) — это класс, определение которого находится внутри другого класса. 
+// Вложенный класс (inner class) — это класс, определение которого находится внутри другого класса. 
 // Обычно вложенные классы применяются для описания таких сущностей, которые могут существовать только 
 // в рамках объекта внешнего класса, особенно когда внешний класс работает с набором объектов вложенного класса.
 
@@ -25,20 +25,20 @@ private:
     class Account   // вложенный класс
     {
     public:
-        Account(const std::string& p_email, const std::string& p_password)
+        Account(const string email, const string password)
         {
-            email = p_email;
-            password = p_password;
+            this->email = email;
+            this->password = password;
         }
         string email;
         string password;
     };
     Account account{"", ""};    // переменная вложенного класса Account
 public:
-    Person(const string& p_name, const string& p_email, const string& p_password)
+    Person(const string name, const string email, const string password)
     {
-        name = p_name;
-        account = Account(p_email, p_password);
+        this->name = name;
+        account = Account(email, password);
     }
     void print()
     {
